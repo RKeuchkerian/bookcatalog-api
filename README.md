@@ -47,8 +47,8 @@ Key features:
 
 ```bash
 # Clone the repo
-git clone https://github.com/<your_username>/<repo>.git
-cd <repo>
+git clone https://github.com/RKeuchkerian/bookcatalog-api.git
+cd bookcatalog-api
 
 # Create virtual environment
 python3 -m venv venv
