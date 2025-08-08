@@ -1,14 +1,13 @@
-FROM python:3.13-slim
+FROM python:3.10-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-COPY requirements.txt .
+COPY requirements.txt /app/
+RUN pip install --no-cache-dir -r requirements.txt
 
-RUN apt-get update && \
-    apt-get install -y netcat-traditional && \
-    pip install -r requirements.txt && \
-    rm -rf /var/lib/apt/lists
+COPY . /app/
 
-COPY . .
-
-ENTRYPOINT ["/app/entrypoint.sh"]
+CMD ["gunicorn", "bookcatalog.wsgi:application", "--bind", "0.0.0.0:8000"]
