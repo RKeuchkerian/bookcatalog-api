@@ -1,0 +1,27 @@
+image:
+  repository: your-dockerhub-username/bookcatalog
+  tag: latest
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 8000
+
+ingress:
+  enabled: true
+  className: ""        # e.g. "nginx" if you use ingress-nginx
+  hosts:
+    - host: bookapi.local   # change to your domain or nip.io
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []              # add secretName + hosts if you have TLS
+
+config:
+  DEBUG: "False"
+  ALLOWED_HOSTS: "*,localhost,127.0.0.1,bookapi.local"
+
+secret:
+  enabled: true
+  SECRET_KEY: "please-change-me"
+

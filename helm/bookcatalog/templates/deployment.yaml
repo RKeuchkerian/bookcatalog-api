@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookcatalog
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bookcatalog
+  template:
+    metadata:
+      labels:
+        app: bookcatalog
+    spec:
+      containers:
+        - name: bookcatalog
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: bookcatalog-config
+            - secretRef:
+                name: bookcatalog-secret
+
+
+ 
