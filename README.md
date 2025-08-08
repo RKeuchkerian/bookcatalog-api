@@ -70,3 +70,4 @@ Romina
 Capstone Project – DevOps Diploma 2025
 Pipeline test
 deploy test
+trigger helm deploy
