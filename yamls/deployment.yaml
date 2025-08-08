@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookcatalog-api
+  labels:
+    app: bookcatalog-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bookcatalog-api
+  template:
+    metadata:
+      labels:
+        app: bookcatalog-api
+    spec:
+      containers:
+        - name: bookcatalog-api
+          image: bookcatalog-api:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8000
+          env:
+            - name: DEVELOPMENT_MODE
+              value: "true"
+            - name: DATABASE_NAME
+              value: "books"
+            - name: DATABASE_USER
+              value: "books"
+            - name: DATABASE_PASSWORD
+              value: "books"
+            - name: DATABASE_HOST
+              value: "db"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bookcatalog-api-service
+spec:
+  selector:
+    app: bookcatalog-api
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+  type: LoadBalancer

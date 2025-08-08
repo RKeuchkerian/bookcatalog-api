@@ -68,3 +68,4 @@ python manage.py runserver
 
 Romina  
 Capstone Project – DevOps Diploma 2025
+Pipeline test
